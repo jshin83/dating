@@ -1,0 +1,14 @@
+{
+  "name": "jshingre/dating",
+  "authors": [
+    {
+      "name": "Jennifer Shin",
+      "email": "jshin13@mail.greenriver.edu"
+
+    }
+
+  ],
+  "require": {
+    "bcosca/fatfree-core": "dev-master"
+  }
+}
