@@ -1,0 +1,19 @@
+/*
+Jen Shin
+15 Jan 2018
+styles.css
+style sheet for dating website
+ */
+
+.italic {
+    font-style: italic;
+
+}
+
+.strong {
+    font-weight: 700;
+}
+
+/*img {
+    margin-top: 20px !important;
+}*/
