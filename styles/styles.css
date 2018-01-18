@@ -7,6 +7,8 @@ style sheet for dating website
 
 .italic {
     font-style: italic;
+    margin-left: 30px !important;
+    margin-right: 30px !important;
 
 }
 
@@ -14,6 +16,7 @@ style sheet for dating website
     font-weight: 700;
 }
 
-/*img {
+img {
     margin-top: 20px !important;
-}*/
+    margin-bottom: 20px !important;
+}
