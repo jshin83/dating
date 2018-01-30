@@ -1,0 +1,92 @@
+<!--
+Jennifer Shin
+30 Jan 2018
+profile.html
+profile information page for dating website
+-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Profile Information </title>
+
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="http://jshin.greenriverdev.com/328/dating/styles/styles.css">
+
+
+</head>
+<header>
+    <nav class="navbar navbar-light bg-light mt-2">
+        <a class="navbar-brand" href="#">My Dating Website</a>
+    </nav>
+</header>
+<body>
+
+<div class="container border border-light rounded mt-3 px-4">
+
+
+    <h1 class="mt-5">Profile</h1>
+    <hr/>
+
+    <form method="post" action="./interests">
+
+        <div class="row">
+            <div class="col-md-6">
+
+                <label><span class="strong">Email</span><br/>
+                    <input type = "text" class="rounded col-md" placeholder="email@gmail.com" size="90%" name="first"></label>
+
+
+                <label><span class="strong">State</span><br/>
+                </label>
+
+                <select class="form-control" name="state" id="state">
+                    <option>--Select--</option>
+                    <repeat group="{{ @states }}" value="{{ @stateOption }}">
+                        <option
+                        <check if="{{ @stateOption == @state }}">selected</check>>
+                        {{ @stateOption }}
+                        </option>
+                    </repeat>
+                </select>
+                <!--<div class="form-control border-0">-->
+                <label class="mt-2"><span class="strong">Seeking</span><br/>
+                    <input type = "radio" name="seeking[]" value="male">&nbsp; Male &nbsp;
+                    <input type = "radio" name="seeking[]" value="female">&nbsp; Female<br/>
+                </label>
+
+            </div>
+
+            <div class="col-md-5 m-1">
+                <h5>Biography</h5>
+                <textarea class=" rounded mt-1 p-2" cols="50" rows="5">[32] Sed ut perspiciatis, unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam eaque ipsa, quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt, explicabo. Nemo enim ipsam voluptatem, quia voluptas sit, aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos, qui ratione voluptatem sequi nesciunt, neque porro quisquam est, qui dolorem ipsum, quia dolor sit amet consectetur adipisci[ng] velit, sed quia non-numquam [do] eius modi tempora inci[di]dunt, ut labore et dolore magnam aliquam quaerat voluptatem. Ut enim ad minima veniam, quis nostrum exercitationem ullam corporis suscipit laboriosam, nisi ut aliquid ex ea commodi consequatur? Quis autem vel eum iure reprehenderit, qui in ea voluptate velit esse, quam nihil molestiae consequatur, vel illum, qui dolorem eum fugiat, quo voluptas nulla pariatur?
+
+[33] At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non-provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non-recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat…
+
+                </textarea>
+
+            </div>
+        </div>
+
+        <div class="row">
+
+            <div class="col-md-11 text-right mb-4">
+                <input type="submit" class="btn btn-primary" value="Next >">
+
+            </div>
+        </div>
+    </form>
+</div>
+
+<!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.12.4/jquery.min.js"></script>
+<!-- Include all compiled plugins (below), or include individual files as needed -->
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>
