@@ -21,5 +21,14 @@ $f3->route('GET /', function() {
     echo $view -> render('pages/home.html');
 }
 );
+
+//personal info page
+$f3->route('GET /personal', function() {
+    //echo '<h1>Form 1</h1>'; //testing purposes
+
+    $view = new View();
+    echo $view -> render('pages/personal_info.html');
+});
+
 //run fat free
 $f3->run();
