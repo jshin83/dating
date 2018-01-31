@@ -28,25 +28,63 @@ results for dating website
 </header>
 
 <body>
-<div class="container border border-light rounded mt-3 px-4">
+<div class="container border border-muted rounded mt-3 px-4 mb-4">
 
     <form method="post" action="#">
 
 
         <div class="row">
-            <div class="col-sm-6 mt-5 ">
+            <div class="col-sm-6 mt-2 ">
 
-            <h3>Fruit Checkboxes</h3>
-            <repeat group="{{ @fruits }}" value = "{{ @fruit }}">
-                <input type = "checkbox" name="fruits[]"
-                       value="{{ @fruit }}">{{ @fruit }}
-            </repeat>
+            <table class="w-100 mt-2 rounded-top rounded-bottom">
+                <tbody class="border border-muted rounded-top rounded-bottom">
+                    <tr class="border border-muted rounded-top">
+                        <td class="p-3">Name: </td>
+                    </tr>
+                    <tr class="border border-muted">
+                        <td class="p-3">Gender: </td>
+                    </tr>
+                    <tr class="border border-muted ">
+                        <td class="p-3">Age: </td>
+                    </tr>
+                    <tr class="border border-muted">
+                        <td class="p-3">Phone: </td>
+                    </tr>
+                    <tr class="border border-muted">
+                        <td class="p-3">Email: </td>
+                    </tr>
+                    <tr class="border border-muted">
+                        <td class="p-3">State: </td>
+                    </tr>
+                    <tr class="border border-muted">
+                        <td class="p-3">Seeking: </td>
+                    </tr>
+                    <tr class="border border-muted rounded-bottom">
+                        <td class="p-3">Interests: </td>
+                    </tr>
+                </tbody>
+            </table>
+            <!--<repeat group="{{ @interests }}" value = "{{ @interest }}">
+                <td>{{ @fruit }}<td>
+            </repeat>-->
             </div>
 
             <div class="col-sm-6 mt-2">
+                <div class="text-center">
+                    <img src="http://jshin.greenriverdev.com/328/dating/images/unicorn.jpg"
+                         class="rounded mt-3 mx-1 h-50 w-50" alt="silhouette of unicorn" style = "width:100%">
+                </div>
+                <h5>Biography</h5>
 
-                <img src="http://jshin.greenriverdev.com/328/dating/images/dating.jpeg"
-                     class="rounded text-align mt-3 mx-1" alt="dating image" style = "width:100%">
+                <p class="text-center">At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non-provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non-recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat…
+                </p>
+            </div>
+        </div>
+
+        <div class="row">
+            <div class="col-sm-11 m-2 text-center pb-4">
+                <input type="submit" class="btn btn-primary btn-lg" value="Contact Me!">
+
             </div>
         </div>
     </form>

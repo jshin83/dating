@@ -91,8 +91,7 @@ $f3->set('outdoor', array(
 $f3->route('GET /', function() {
     $view = new Template();
     echo $view -> render('pages/home.html');
-}
-);
+});
 
 //personal info page
 $f3->route('GET /personal', function() {
@@ -116,6 +115,12 @@ $f3->route('GET|POST /interests', function() {
 
     $view = new Template();
     echo $view -> render('pages/interests.html');
+});
+
+//results
+$f3->route('GET|POST /results', function() {
+    $view = new Template();
+    echo $view -> render('pages/results.html');
 });
 
 //run fat free

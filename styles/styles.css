@@ -26,10 +26,9 @@ img {
 }
 
 textarea {
-    white-space: nowrap;
-    overflow: scroll;
-    overflow-x: hidden;
-    overflow-y: scroll;
+
+    white-space: normal !important;
+    overflow-y: scroll !important;
 
 }
 
