@@ -34,14 +34,18 @@ profile information page for dating website
     <h1 class="mt-5">Profile</h1>
     <hr/>
 
-    <form method="post" action="./interests">
+
+    <form method="post" <check if="{{ @success }}">action="./interests"</check> action="#">
 
         <div class="row">
             <div class="col-md-6">
 
                 <label><span class="strong">Email</span><br/>
-                    <input type = "text" class="rounded col-md" placeholder="email@gmail.com" size="90%" name="first"></label>
-
+                    <input type = "text" class="rounded col-md" placeholder="email@gmail.com" size="90%"
+                           name="email" value="{{ @email }}"></label>
+                <check if="{{ @errors['email'] }}">
+                    <p class="text-danger">{{ @errors['email'] }}</p>
+                </check>
 
                 <label><span class="strong">State</span><br/>
                 </label>
@@ -55,25 +59,30 @@ profile information page for dating website
                         </option>
                     </repeat>
                 </select>
-                <!--<div class="form-control border-0">-->
+                <check if="{{ @errors['state'] }}">
+                    <p class="text-danger">{{ @errors['state'] }}</p>
+                </check>
+
                 <label class="mt-2"><span class="strong">Seeking</span><br/>
-                    <input type = "radio" name="seeking[]" value="male">&nbsp; Male &nbsp;
-                    <input type = "radio" name="seeking[]" value="female">&nbsp; Female<br/>
+                    <input type = "radio" name="seeking" value="male" <check if="{{ @seeking == male }}">checked</check>>&nbsp; Male &nbsp;
+                    <input type = "radio" name="seeking" value="female" <check if="{{ @seeking == female }}">checked</check>>&nbsp; Female<br/>
                 </label>
+                <check if="{{ @errors['seeking'] }}">
+                    <p class="text-danger">{{ @errors['seeking'] }}</p>
+                </check>
 
             </div>
 
             <div class="col-md-5 m-1">
                 <h5>Biography</h5>
-                <textarea class=" rounded mt-1 p-2" cols="50" rows="5"></textarea>
-
+                <textarea class=" rounded mt-1 p-2" cols="50" rows="5" name="biography" value="{{ @biography }}"></textarea>
             </div>
         </div>
 
         <div class="row">
 
             <div class="col-md-11 text-right mb-4">
-                <input type="submit" class="btn btn-primary" value="Next >">
+                <input type="submit" class="btn btn-primary" name="submit" value="Next >">
 
             </div>
         </div>

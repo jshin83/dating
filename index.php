@@ -10,6 +10,8 @@ session_start();
 
 //require the autoload file
 require_once ('vendor/autoload.php');
+//include ('model/validate.php');
+
 
 //create an instance of Base class
 $f3 = Base::instance();
@@ -88,8 +90,6 @@ $f3->set('outdoor', array(
    'climbing'
 ));
 
-//include ('model/validate.php');
-
 
 //set default path to page/home
 $f3->route('GET /', function() {
@@ -114,7 +114,29 @@ $f3->route('GET|POST /personal', function($f3) {
        // echo "name $name, age $age, gender $gender, phone $phone, ";
 
         include ('model/validate.php');
+        if(!validPhone($phone))
+        {
+            $errors['phone'] = "Please enter a 10 digit phone number with dashes.";
+        }
 
+        if(!validAge($age))
+        {
+            $errors['age'] = "Please enter all numbers - must be 19 or older.";
+        }
+
+        if(!validString($first))
+        {
+            $errors['name'] = "Required: name must be all letters.";
+        }
+
+        if(!validString($last))
+        {
+            $errors['name'] = "Required: name must be all letters.";
+        }
+
+        if(empty($gender)) {
+            $errors['gender'] = "Required";
+        }
 
         $_SESSION['name'] = $name;
         $_SESSION['age'] = $age;
@@ -150,14 +172,49 @@ $f3->route('GET|POST /personal', function($f3) {
 
 //profile page
 $f3->route('GET|POST /profile', function($f3) {
-    /*$f3->set('first', $_POST['first']);
-    $f3->set('last', $_POST['last']);
-    $f3->set('age', $_POST['age']);
-    $f3->set('gender', $_POST['gender']);
-    $f3->set('phone', $_POST['phone']);
-*/
+    print_r($_POST);
+    if(isset($_POST['submit'])) {
+        $state = $_POST['state'];
+        $email = $_POST['email'];
+        $seeking = $_POST['seeking'];
+        $biography = $_POST['biography'];
+        $errors = $_POST['errors'];
+        $success = $_POST['success'];
 
 
+
+        if(!filter_var($email, FILTER_VALIDATE_EMAIL))
+        {
+            $errors['email'] = "Required: must be a valid email.";
+        }
+
+        if($state=="--Select--") {
+            $errors['state'] = "Required: choose a state";
+        }
+
+        if(empty($seeking)) {
+            $errors['seeking'] = "Required";
+        }
+
+        if($success) {
+            //redirect
+            $f3->route('GET /interest');
+        }
+
+        $f3->set('state', $state);
+        $f3->set('email', $email);
+        $f3->set('seeking', $seeking);
+        $f3->set('biography', $biography);
+        $f3->set('errors', $errors);
+        $f3->set('success', $success);
+     //   $f3->set('phone', $_POST['phone']);
+
+        $_SESSION['state'] = $state;
+        $_SESSION['email'] = $email;
+        $_SESSION['seeking'] = $seeking;
+        $_SESSION['biography'] = $biography;
+
+}
     $view = new Template();
     echo $view -> render('pages/profile.html');
 });
