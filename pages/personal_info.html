@@ -34,27 +34,49 @@ personal information page for dating website
     <h1 class="mt-5 ml-4">Personal Information</h1>
     <hr class="ml-4"/>
 
-    <form method="post" action="./profile">
+    <check if="{{ @success}}">
+        <form method="post" action="./profile">
+    </check>
+    <form method="post" action="#">
 
     <div class="row">
         <div class="col-md-7 ml-4">
 
             <label><span class="strong">First Name</span><br/>
-                <input type = "text" class="rounded col-md" placeholder="Sarah" size="90%" name="first"></label>
+                <input type = "text" class="rounded col-md" placeholder="Sarah" size="90%" name="first"
+                       value = "{{ @first }}"></label>
+            <check if="{{ @errors['name'] }}">
+                <p class="text-danger">{{ @errors['name'] }}</p>
+            </check>
 
             <label><span class="strong">Last Name</span><br/>
-                <input type = "text" class="rounded col-md" placeholder="Smith" size="90%" name="last"></label>
+                <input type = "text" class="rounded col-md" placeholder="Smith" size="90%" name="last"
+                       value = "{{ @last }}"></label>
+            <check if="{{ @errors['name'] }}">
+                <p class="text-danger">{{ @errors['name'] }}</p>
+            </check>
 
             <label><span class="strong">Age</span><br/>
-                <input type = "text" class="rounded col-md" placeholder="30" size="90%" name="age"></label>
+                <input type = "text" class="rounded col-md" placeholder="30" size="90%" name="age"
+                       value = "{{ @age }}"></label>
+            <check if="{{ @errors['age'] }}">
+                <p class="text-danger">{{ @errors['age'] }}</p>
+            </check>
 
             <label><span class="strong">Gender</span><br/>
-                <input type = "radio" name="gender[]" value="male">&nbsp; Male &nbsp;
-                <input type = "radio" name="gender[]" value="female">&nbsp; Female<br/>
+                <input type = "radio" name="gender" value="male" <check if="{{ @gender == male }}">checked</check>>&nbsp; Male &nbsp;
+                <input type = "radio" name="gender" value="female" <check if="{{ @gender == female }}">checked</check>>&nbsp; Female<br/>
             </label>
+            <check if="{{ @errors['gender'] }}">
+                <p class="text-danger">{{ @errors['gender'] }}</p>
+            </check>
 
             <label><span class="strong">Phone Number</span><br/>
-                <input type = "text" class="rounded col-md" placeholder="222-333-4444" size="90%" name="phone"></label>
+                <input type = "text" class="rounded col-md" placeholder="222-333-4444" size="90%" name="phone"
+                       value = "{{ @phone }}"></label>
+            <check if="{{ @errors['phone'] }}">
+                <p class="text-danger">{{ @errors['phone'] }}</p>
+            </check>
 
         </div>
 
@@ -71,7 +93,7 @@ personal information page for dating website
     <div class="row">
 
         <div class="col-md-11 text-right mb-4 ml-5">
-            <input type="submit" class="btn btn-primary" value="Next >">
+            <input type="submit" class="btn btn-primary" name = "submit" value="Next >">
 
         </div>
     </div>

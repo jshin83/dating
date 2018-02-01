@@ -59,9 +59,10 @@ function validPhone($phone)
  * @return bool true if name is all letters.
  */
 
-function validName($name)
+function validName($string)
 {
-    return !empty($name) && ctype_alpha($name);
+    str_replace(array(" ","-"), "", $string);
+    return ctype_alpha($string);
 }
 
 /**
@@ -75,6 +76,36 @@ function validAge($age)
     return is_numeric($age) && $age > 18;
 }
 
+/**
+ * Success if all data is valid
+ * @param $name string input for name
+ * @param $age int for age
+ * @param $phone int input for phone
+ * @param $indoorInterests array input for indoor interests
+ * @param $outdoorInterests array input for outdoor interests
+ * @param $gender string input for gender
+ * @return $errors sets $errors to empty if conditions true
+ */
+
+/*function validatePersonalInfo($name, $age, $phone, $gender)
+{
+    if (validName($name) && validAge($age) && validPhone($phone) && !empty($gender)) {
+        unset($errors);
+        $errors = array();
+    }
+    return $errors;
+}
+
+function validateInterests($indoorInterests, $outdoorInterests)
+{
+    if (validOutdoor($outdoorInterests)&& validIndoor($indoorInterests)) {
+        unset($errors);
+        $errors = array();
+    }
+    return $errors;
+}*/
+
+
 if(!validPhone($phone))
 {
     $errors['phone'] = "Please enter a 10 digit phone number with dashes.";
@@ -82,12 +113,23 @@ if(!validPhone($phone))
 
 if(!validAge($age))
 {
-    $errors['age'] = "Please enter a valid age - must be over 18.";
+    $errors['age'] = "Please enter all numbers - must be 19 or older.";
 }
 
-if(!validName($name))
+if(!validName($first))
 {
-    $errors['name'] = "Name must be all letters.";
+    $errors['name'] = "Required: name must be all letters.";
 }
+
+if(!validName($last))
+{
+    $errors['name'] = "Required: name must be all letters.";
+}
+
+if(empty($gender)) {
+    $errors['gender'] = "Required";
+}
+
+//$errors = validatePersonalInfo($name, $age, $phone, $gender);
 
 $success = sizeof($errors) == 0;
