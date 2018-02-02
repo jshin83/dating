@@ -33,15 +33,15 @@ results for dating website
     <form method="post" action="#">
 
         <div class="row">
-            <div class="col-sm-6 mt-2 ">
+            <div class="col-sm-6 mt-2">
 
-            <table class="w-100 mt-2 rounded-top rounded-bottom">
-                <tbody class="border border-muted rounded-top rounded-bottom">
-                    <tr class="border border-muted rounded-top">
-                        <td class="p-3">Name: {{ $_SESSION['name'] }}</td>
+            <table class="w-100 mt-2">
+                <tbody>
+                    <tr class="rounded-top border border-muted" id="roundTop">
+                        <td class="p-3" >Name: {{ $_SESSION['name'] }}</td>
                     </tr>
                     <tr class="border border-muted">
-                        <td class="p-3">Gender: {{ $_SESSION['gender'] }}</td>
+                        <td class="p-3">Gender: {{ ucfirst($_SESSION['gender']) }}</td>
                     </tr>
                     <tr class="border border-muted ">
                         <td class="p-3">Age: {{ $_SESSION['age'] }}</td>
@@ -53,14 +53,14 @@ results for dating website
                         <td class="p-3">Email: {{ $_SESSION['email'] }}</td>
                     </tr>
                     <tr class="border border-muted">
-                        <td class="p-3">State: {{ $_SESSION['state'] }}</td>
+                        <td class="p-3">State: {{ strtoupper($_SESSION['state']) }}</td>
                     </tr>
                     <tr class="border border-muted">
-                        <td class="p-3">Seeking: {{ $_SESSION['seeking'] }}</td>
+                        <td class="p-3">Seeking: {{ ucfirst($_SESSION['seeking']) }}</td>
                     </tr>
-                    <tr class="border border-muted rounded-bottom">
-                        <td class="p-3">Interests: <repeat group="{{ $_SESSION['indoorInterests'] }}" value="{{ @indoorInterest }}">{{ @indoorInterest}}</repeat>
-                            <repeat group="{{ $_SESSION['outdoorInterests'] }}" value="{{ @outdoorInterest }}">{{ @outdoorInterest}}</repeat></td>
+                    <tr class="rounded-bottom border border-muted" id="roundBottom">
+                        <td class="p-3">Interests: <repeat group="{{ $_SESSION['indoorInterests'] }}" value="{{ @indoorInterest }}">{{ @indoorInterest}} </repeat>
+                            <repeat group="{{ $_SESSION['outdoorInterests'] }}" value="{{ @outdoorInterest }}">{{ @outdoorInterest}} </repeat></td>
                     </tr>
                 </tbody>
             </table>
@@ -76,14 +76,13 @@ results for dating website
                 </div>
                 <h5>Biography</h5>
 
-                <p class="text-center">At vero eos et accusamus et iusto odio dignissimos ducimus, qui blanditiis praesentium voluptatum deleniti atque corrupti, quos dolores et quas molestias excepturi sint, obcaecati cupiditate non-provident, similique sunt in culpa, qui officia deserunt mollitia animi, id est laborum et dolorum fuga. Et harum quidem rerum facilis est et expedita distinctio. Nam libero tempore, cum soluta nobis est eligendi optio, cumque nihil impedit, quo minus id, quod maxime placeat, facere possimus, omnis voluptas assumenda est, omnis dolor repellendus. Temporibus autem quibusdam et aut officiis debitis aut rerum necessitatibus saepe eveniet, ut et voluptates repudiandae sint et molestiae non-recusandae. Itaque earum rerum hic tenetur a sapiente delectus, ut aut reiciendis voluptatibus maiores alias consequatur aut perferendis doloribus asperiores repellat…
-                </p>
+                <p class="text-center">{{ $_SESSION['biography']}}</p>
             </div>
         </div>
 
         <div class="row">
-            <div class="col-sm-11 m-2 text-center pb-4">
-                <input type="submit" class="btn btn-primary btn-lg" value="Contact Me!">
+            <div class="col-sm mt-4 mb-3 text-center pb-4">
+                <input type="submit" class="btn btn-primary btn-lg" name="submit" value="Contact Me!">
 
             </div>
         </div>

@@ -42,13 +42,13 @@ interests for dating website
                 <h6 class="strong">Indoor Interests</h6>
                 <table class="table">
                     <tbody>
-                    <tr>
+                    <tr class="border-0">
 
                         <repeat group="{{ @indoor }}" value = "{{ @indoorOptions }}">
                             <!--<div class="col-sm-4">-->
                             <td class="w-25"><input type = "checkbox" name="indoorList[]" value="{{ @indoorOptions }}" <check if="{{
                             isset($_POST['submit']) && in_array(@indoorOptions, $_POST['indoorList'])}}">checked</check>>&nbsp&nbsp{{ @indoorOptions }}</td>
-                            <check if="{{ @indoorOptions == 'board games' }}"></tr><tr></check>
+                            <check if="{{ @indoorOptions == 'board games' }}"></tr><tr class="border-0"></check>
 
                         </repeat>
                         <check if="{{ @errors['indoor'] }}">
