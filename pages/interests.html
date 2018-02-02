@@ -34,7 +34,7 @@ interests for dating website
         <h1 class="mt-5">Personal Information</h1>
         <hr/>
 
-        <form method="post" action="./results">
+        <form method="post" action="#">
 
 
         <div class="row">
@@ -44,13 +44,13 @@ interests for dating website
                     <tbody>
                     <tr>
 
-                <repeat group="{{ @indoor }}" value = "{{ @indoorOptions }}">
-                    <!--<div class="col-sm-4">-->
-                    <td class="w-25"><input type = "checkbox" name="indoor[]"
-                                               value="{{ @indoorOptions }}">&nbsp&nbsp{{ @indoorOptions }}</td>
-                    <check if="{{ @indoorOptions == 'board games' }}"></tr><tr></check>
+                        <repeat group="{{ @indoor }}" value = "{{ @indoorOptions }}">
+                            <!--<div class="col-sm-4">-->
+                            <td class="w-25"><input type = "checkbox" name="indoorList[]" value="{{ @indoorOptions }}" <check if="{{
+                            in_array(@indoorOptions, $_POST['indoorList'])}}">checked</check>>&nbsp&nbsp{{ @indoorOptions }}</td>
+                            <check if="{{ @indoorOptions == 'board games' }}"></tr><tr></check>
 
-                </repeat>
+                        </repeat>
                     </tr>
                     </tbody>
                 </table>
@@ -66,11 +66,11 @@ interests for dating website
 
                         <repeat group="{{ @outdoor }}" value = "{{ @outdoorOptions }}">
                             <!--<div class="col-sm-4">-->
-                            <td class="w-25"><input type = "checkbox" name="indoor[]"
-                                                           value="{{ @outdoorOptions }}">&nbsp&nbsp{{ @outdoorOptions }}</td>
+                            <td class="w-25"><input type = "checkbox" name="outdoorList[]" value="{{ @outdoorOptions }}" <check if="{{
+                            in_array(@outdoorOptions, $_POST['outdoorList'])}}">checked</check>>&nbsp&nbsp{{ @outdoorOptions }}</td>
                             <check if="{{ @outdoorOptions == 'collecting' }}"></tr><tr></check>
 
-                        </repeat>
+                    </repeat>
                     </tr>
                     </tbody>
                 </table>

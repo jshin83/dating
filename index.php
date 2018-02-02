@@ -10,8 +10,6 @@ session_start();
 
 //require the autoload file
 require_once ('vendor/autoload.php');
-//include ('model/validate.php');
-
 
 //create an instance of Base class
 $f3 = Base::instance();
@@ -111,8 +109,6 @@ $f3->route('GET|POST /personal', function($f3) {
         $phone = $_POST['phone'];
         $errors = $_POST['errors'];
 
-       // echo "name $name, age $age, gender $gender, phone $phone, ";
-
         include ('model/validate.php');
         if(!validPhone($phone))
         {
@@ -154,34 +150,29 @@ $f3->route('GET|POST /personal', function($f3) {
         $f3->set('errors', $errors);
         $f3->set('success', $success);
 
+        $success = (sizeof($errors) == 0);
+
         if($success) {
             //redirect
-            $f3->route('GET /profile');
+            $f3->reroute('@profile');
         }
-//        } else {
-////            echo the template
-//            $view = new Template();
-//            echo $view -> render('pages/personal_info.html');
-//        }
     }
- //   print_r($_SESSION);
- //   print_r( $errors);
+
     $view = new Template();
     echo $view -> render('pages/personal_info.html');
 });
 
 //profile page
-$f3->route('GET|POST /profile', function($f3) {
-    print_r($_POST);
+$f3->route('GET|POST @profile: /profile', function($f3) {
+    //print_r($_POST); testing only
     if(isset($_POST['submit'])) {
         $state = $_POST['state'];
         $email = $_POST['email'];
         $seeking = $_POST['seeking'];
-        $biography = $_POST['biography'];
+        $biography = htmlspecialchars($_POST['biography']);
         $errors = $_POST['errors'];
-        $success = $_POST['success'];
 
-
+        include ('model/validate.php');
 
         if(!filter_var($email, FILTER_VALIDATE_EMAIL))
         {
@@ -196,10 +187,11 @@ $f3->route('GET|POST /profile', function($f3) {
             $errors['seeking'] = "Required";
         }
 
-        if($success) {
-            //redirect
-            $f3->route('GET /interest');
+        if(empty($biography)) {
+            $errors['biography'] = "Required";
         }
+
+        $success = $_POST['success'];
 
         $f3->set('state', $state);
         $f3->set('email', $email);
@@ -214,21 +206,71 @@ $f3->route('GET|POST /profile', function($f3) {
         $_SESSION['seeking'] = $seeking;
         $_SESSION['biography'] = $biography;
 
+        $success = (sizeof($errors) == 0);
+
+        if($success) {
+            //redirect
+            $f3->reroute('@interests');
+        }
 }
     $view = new Template();
     echo $view -> render('pages/profile.html');
 });
 
 //interests
-$f3->route('GET|POST /interests', function() {
-    //echo '<h1>Form 1</h1>'; //testing purposes
+$f3->route('GET|POST @interests: /interests', function($f3) {
+    print_r($_POST);
 
+    if(isset($_POST['submit'])) {
+        //$indoorInterests = array();
+        $indoorInterests = $_POST['indoorList'];
+        $outdoorInterests = $_POST['outdoorList'];
+        $errors = $_POST['errors'];
+        print_r($_POST['indoorList']);
+        print_r($indoorInterests);
+        print_r($outdoorInterests);
+
+        /*include ('model/validate.php');
+
+        if(!validOutdoor($outdoorInterests))
+        {
+            $errors['outdoor'] = "Choose from the outdoor options provided.";
+        }
+
+        if(!validIndoor($indoorInterests))
+        {
+            $errors['indoor'] = "Choose from the indoor options provided.";
+        }*/
+
+        $success = $_POST['success'];
+
+        $f3->set('indoorInterests', $indoorInterests);
+ //       $f3->set('outdoorInterests', $outdoorInterests);
+        $f3->set('errors', $errors);
+        $f3->set('success', $success);
+        //   $f3->set('phone', $_POST['phone']);
+
+        $_SESSION['indoorInterests'] = $indoorInterests;
+ //       $_SESSION['outdoorInterests'] = $outdoorInterests;
+
+/*
+        $success = (sizeof($errors) == 0);
+
+        if($success) {
+            //redirect
+            $f3->reroute('@interests');
+        }*/
+    }
     $view = new Template();
     echo $view -> render('pages/interests.html');
 });
 
 //results
-$f3->route('GET|POST /results', function() {
+$f3->route('GET|POST @results: /results', function() {
+
+    if(isset($_POST['submit'])) {
+
+    }
     $view = new Template();
     echo $view -> render('pages/results.html');
 });
