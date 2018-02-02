@@ -47,9 +47,8 @@ interests for dating website
                         <repeat group="{{ @indoor }}" value = "{{ @indoorOptions }}">
                             <!--<div class="col-sm-4">-->
                             <td class="w-25"><input type = "checkbox" name="indoorList[]" value="{{ @indoorOptions }}" <check if="{{
-                            isset($_POST['submit']) && in_array(@indoorOptions, $_POST['indoorList'])}}">checked</check>>&nbsp&nbsp{{ @indoorOptions }}</td>
+                            isset($_POST['submit']) && !empty($_POST['indoorList']) && in_array(@indoorOptions, $_POST['indoorList'])}}">checked</check>>&nbsp&nbsp{{ @indoorOptions }}</td>
                             <check if="{{ @indoorOptions == 'board games' }}"></tr><tr class="border-0"></check>
-
                         </repeat>
                         <check if="{{ @errors['indoor'] }}">
                             <p class="text-danger">{{ @errors['indoor'] }}</p>
@@ -70,9 +69,8 @@ interests for dating website
                         <repeat group="{{ @outdoor }}" value = "{{ @outdoorOptions }}">
                             <!--<div class="col-sm-4">-->
                             <td class="w-25"><input type = "checkbox" name="outdoorList[]" value="{{ @outdoorOptions }}" <check if="{{
-                            isset($_POST['submit']) && in_array(@outdoorOptions, $_POST['outdoorList'])}}">checked</check>>&nbsp&nbsp{{ @outdoorOptions }}</td>
+                            isset($_POST['submit']) && !empty($_POST['outdoorList']) && in_array(@outdoorOptions, $_POST['outdoorList'])}}">checked</check>>&nbsp&nbsp{{ @outdoorOptions }}</td>
                             <check if="{{ @outdoorOptions == 'collecting' }}"></tr><tr></check>
-
                         </repeat>
                         <check if="{{ @errors['outdoor'] }}">
                             <p class="text-danger">{{ @errors['outdoor'] }}</p>
@@ -81,6 +79,12 @@ interests for dating website
                     </tbody>
                 </table>
             </div>
+            <check if="{{ @errors['emptyInterests'] }}">
+                <p class="text-danger ml-3">{{ @errors['emptyInterests'] }}</p>
+            </check>
+            <check if="{{ @errors['oneEmpty'] }}">
+                <p class="text-danger ml-3">{{ @errors['oneEmpty'] }}</p>
+            </check>
         </div>
 
         <div class="col-sm-12 mt-2">

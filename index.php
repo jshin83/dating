@@ -111,7 +111,7 @@ $f3->route('GET|POST /personal', function($f3) {
         include ('model/validate.php');
         if(!validPhone($phone))
         {
-            $errors['phone'] = "Please enter a 10 digit phone number with dashes.";
+            $errors['phone'] = "Please enter a 10 digit phone number (dashes are okay).";
         }
 
         if(!validAge($age))
@@ -229,16 +229,20 @@ $f3->route('GET|POST @interests: /interests', function($f3) {
 
         include ('model/validate.php');
 
-        if(!validOutdoor($outdoorInterests))
-        {
-            $errors['outdoor'] = "Choose from the outdoor options provided.";
-        }
+        if(empty($_POST['indoorList']) && empty($_POST['outdoorList'])) {
+            $errors['emptyInterests'] = "Please choose atleast one interest from each category.";
+        } else if(empty($_POST['indoorList']) || empty($_POST['outdoorList'])) {
+            $errors['oneEmpty'] = "Please choose atleast one interest from each category**.";
+        } else {
 
-        if(!validIndoor($indoorInterests))
-        {
-            $errors['indoor'] = "Choose from the indoor options provided.";
-        }
+            if (!validOutdoor($outdoorInterests)) {
+                $errors['outdoor'] = "Choose from the outdoor options provided.";
+            }
 
+            if (!validIndoor($indoorInterests)) {
+                $errors['indoor'] = "Choose from the indoor options provided.";
+            }
+        }
         $success = $_POST['success'];
 
         $f3->set('indoorInterests', $indoorInterests);
