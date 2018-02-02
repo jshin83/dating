@@ -98,12 +98,9 @@ $f3->route('GET /', function() {
 //personal info page
 $f3->route('GET|POST /personal', function($f3) {
     //print_r($_POST);
-
-
     if (isset ($_POST['submit'])) {
         $first = ucfirst(strtolower($_POST['first']));
         $last = ucfirst(strtolower($_POST['last']));
-        $name = $first.' '.$last;
         $age = $_POST['age'];
         $gender = $_POST['gender'];
         $phone = $_POST['phone'];
@@ -122,22 +119,20 @@ $f3->route('GET|POST /personal', function($f3) {
 
         if(!validString($first))
         {
-            $errors['name'] = "Required: name must be all letters.";
+            $errors['firstName'] = "Required: name must be all letters.";
         }
 
         if(!validString($last))
         {
-            $errors['name'] = "Required: name must be all letters.";
+            $errors['lastName'] = "Required: name must be all letters.";
         }
 
         if(empty($gender)) {
             $errors['gender'] = "Required";
         }
 
-        $_SESSION['name'] = $name;
-        $_SESSION['age'] = $age;
-        $_SESSION['gender'] = $gender;
-        $_SESSION['phone'] = $phone;
+        $name = $first.' '.$last;
+
         $success = $_POST['success'];
 
         //$errors = validatePersonalInfo($name, $age, $phone, $gender);
@@ -150,10 +145,15 @@ $f3->route('GET|POST /personal', function($f3) {
         $f3->set('errors', $errors);
         $f3->set('success', $success);
 
+        $_SESSION['name'] = $name;
+        $_SESSION['age'] = $age;
+        $_SESSION['gender'] = $gender;
+        $_SESSION['phone'] = $phone;
+
         $success = (sizeof($errors) == 0);
 
         if($success) {
-            //redirect
+            //redirect to profile
             $f3->reroute('@profile');
         }
     }
@@ -199,7 +199,6 @@ $f3->route('GET|POST @profile: /profile', function($f3) {
         $f3->set('biography', $biography);
         $f3->set('errors', $errors);
         $f3->set('success', $success);
-     //   $f3->set('phone', $_POST['phone']);
 
         $_SESSION['state'] = $state;
         $_SESSION['email'] = $email;
@@ -209,7 +208,7 @@ $f3->route('GET|POST @profile: /profile', function($f3) {
         $success = (sizeof($errors) == 0);
 
         if($success) {
-            //redirect
+            //redirect to interests
             $f3->reroute('@interests');
         }
 }
@@ -219,18 +218,14 @@ $f3->route('GET|POST @profile: /profile', function($f3) {
 
 //interests
 $f3->route('GET|POST @interests: /interests', function($f3) {
-    print_r($_POST);
+    //print_r($_POST);
 
     if(isset($_POST['submit'])) {
-        //$indoorInterests = array();
         $indoorInterests = $_POST['indoorList'];
         $outdoorInterests = $_POST['outdoorList'];
         $errors = $_POST['errors'];
-        print_r($_POST['indoorList']);
-        print_r($indoorInterests);
-        print_r($outdoorInterests);
 
-        /*include ('model/validate.php');
+        include ('model/validate.php');
 
         if(!validOutdoor($outdoorInterests))
         {
@@ -240,26 +235,25 @@ $f3->route('GET|POST @interests: /interests', function($f3) {
         if(!validIndoor($indoorInterests))
         {
             $errors['indoor'] = "Choose from the indoor options provided.";
-        }*/
+        }
 
         $success = $_POST['success'];
 
         $f3->set('indoorInterests', $indoorInterests);
- //       $f3->set('outdoorInterests', $outdoorInterests);
+        $f3->set('outdoorInterests', $outdoorInterests);
         $f3->set('errors', $errors);
         $f3->set('success', $success);
-        //   $f3->set('phone', $_POST['phone']);
 
         $_SESSION['indoorInterests'] = $indoorInterests;
- //       $_SESSION['outdoorInterests'] = $outdoorInterests;
+        $_SESSION['outdoorInterests'] = $outdoorInterests;
 
-/*
+
         $success = (sizeof($errors) == 0);
 
         if($success) {
-            //redirect
-            $f3->reroute('@interests');
-        }*/
+            //redirect to results
+            $f3->reroute('@results');
+        }
     }
     $view = new Template();
     echo $view -> render('pages/interests.html');
@@ -268,9 +262,6 @@ $f3->route('GET|POST @interests: /interests', function($f3) {
 //results
 $f3->route('GET|POST @results: /results', function() {
 
-    if(isset($_POST['submit'])) {
-
-    }
     $view = new Template();
     echo $view -> render('pages/results.html');
 });

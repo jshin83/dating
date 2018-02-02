@@ -32,35 +32,35 @@ results for dating website
 
     <form method="post" action="#">
 
-
         <div class="row">
             <div class="col-sm-6 mt-2 ">
 
             <table class="w-100 mt-2 rounded-top rounded-bottom">
                 <tbody class="border border-muted rounded-top rounded-bottom">
                     <tr class="border border-muted rounded-top">
-                        <td class="p-3">Name: </td>
+                        <td class="p-3">Name: {{ $_SESSION['name'] }}</td>
                     </tr>
                     <tr class="border border-muted">
-                        <td class="p-3">Gender: </td>
+                        <td class="p-3">Gender: {{ $_SESSION['gender'] }}</td>
                     </tr>
                     <tr class="border border-muted ">
-                        <td class="p-3">Age: </td>
+                        <td class="p-3">Age: {{ $_SESSION['age'] }}</td>
                     </tr>
                     <tr class="border border-muted">
-                        <td class="p-3">Phone: </td>
+                        <td class="p-3">Phone: {{ $_SESSION['phone'] }}</td>
                     </tr>
                     <tr class="border border-muted">
-                        <td class="p-3">Email: </td>
+                        <td class="p-3">Email: {{ $_SESSION['email'] }}</td>
                     </tr>
                     <tr class="border border-muted">
-                        <td class="p-3">State: </td>
+                        <td class="p-3">State: {{ $_SESSION['state'] }}</td>
                     </tr>
                     <tr class="border border-muted">
-                        <td class="p-3">Seeking: </td>
+                        <td class="p-3">Seeking: {{ $_SESSION['seeking'] }}</td>
                     </tr>
                     <tr class="border border-muted rounded-bottom">
-                        <td class="p-3">Interests: </td>
+                        <td class="p-3">Interests: <repeat group="{{ $_SESSION['indoorInterests'] }}" value="{{ @indoorInterest }}">{{ @indoorInterest}}</repeat>
+                            <repeat group="{{ $_SESSION['outdoorInterests'] }}" value="{{ @outdoorInterest }}">{{ @outdoorInterest}}</repeat></td>
                     </tr>
                 </tbody>
             </table>

@@ -96,14 +96,14 @@ function validatePersonalInfo($name, $age, $phone, $gender)
     return $errors;
 }
 
-function validateInterests($indoorInterests, $outdoorInterests)
+/*function validateInterests($indoorInterests, $outdoorInterests)
 {
     if (validOutdoor($outdoorInterests)&& validIndoor($indoorInterests)) {
         unset($errors);
         $errors = array();
     }
     return $errors;
-}
+}*/
 
 
 //$errors = validatePersonalInfo($name, $age, $phone, $gender);

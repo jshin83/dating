@@ -45,15 +45,15 @@ personal information page for dating website
             <label><span class="strong">First Name</span><br/>
                 <input type = "text" class="rounded col-md" placeholder="Sarah" size="90%" name="first"
                        value = "{{ @first }}"></label>
-            <check if="{{ @errors['name'] }}">
-                <p class="text-danger">{{ @errors['name'] }}</p>
+            <check if="{{ @errors['firstName'] }}">
+                <p class="text-danger">{{ @errors['firstName'] }}</p>
             </check>
 
             <label><span class="strong">Last Name</span><br/>
                 <input type = "text" class="rounded col-md" placeholder="Smith" size="90%" name="last"
                        value = "{{ @last }}"></label>
-            <check if="{{ @errors['name'] }}">
-                <p class="text-danger">{{ @errors['name'] }}</p>
+            <check if="{{ @errors['lastName'] }}">
+                <p class="text-danger">{{ @errors['lastName'] }}</p>
             </check>
 
             <label><span class="strong">Age</span><br/>
