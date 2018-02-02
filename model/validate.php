@@ -73,7 +73,7 @@ function validString($string)
 
 function validAge($age)
 {
-    return is_numeric($age) && $age > 18;
+    return is_numeric($age) && $age >= 18;
 }
 
 /**

@@ -116,7 +116,7 @@ $f3->route('GET|POST /personal', function($f3) {
 
         if(!validAge($age))
         {
-            $errors['age'] = "Please enter all numbers - must be 19 or older.";
+            $errors['age'] = "Please enter all numbers - must be 18 or older.";
         }
 
         if(!validString($first))
