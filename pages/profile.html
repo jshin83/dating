@@ -75,7 +75,10 @@ profile information page for dating website
 
             <div class="col-md-5 m-1">
                 <h5>Biography</h5>
-                <textarea class=" rounded mt-1 p-2" cols="50" rows="5" name="biography" value="{{ @biography }}"></textarea>
+                <textarea class=" rounded mt-1 p-2" cols="50" rows="5" name="biography">{{ @biography }}</textarea>
+                <check if="{{ @errors['biography'] }}">
+                    <p class="text-danger">{{ @errors['biography'] }}</p>
+                </check>
             </div>
         </div>
 
