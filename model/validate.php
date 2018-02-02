@@ -1,16 +1,16 @@
 <?php
 /**
- * Created by PhpStorm.
- * User: Jen Shin
+ * This file contains validation for dating website.
+ *
+ * validate.php
  * Date: 1/31/18
- * Time: 12:35 AM
- * Copyright 2018
+ * @author Jen Shin <jshin@mail.greenriver.edu>
+ * @copyright 2018
  */
-
 
 /**
  * Checks user input of outdoor interests against valid choices.
- * @param $outdoorInterests user inputted array
+ * @param $outdoorInterests array of user choices
  * @return bool true if in array of valid outdoor interests array
  */
 function validOutdoor($outdoorInterests)
@@ -26,7 +26,7 @@ function validOutdoor($outdoorInterests)
 
 /**
  * Checks user input of indoor interests against valid choices.
- * @param $indoorInterests user inputted array
+ * @param $indoorInterests array of user choices
  * @return bool true if in array of valid indoor interests array
  */
 function validIndoor($indoorInterests)
@@ -42,7 +42,7 @@ function validIndoor($indoorInterests)
 
 /**
  * Strips dashes and checks if there are 10 digits.
- * @param $phone user inputted phone number
+ * @param $phone int, inputted phone number
  * @return bool true if all numbers and 10 digits.
  */
 
@@ -54,9 +54,9 @@ function validPhone($phone)
 }
 
 /**
- * Checks if name is all alphabetical and not empty.
- * @param $name user input for name
- * @return bool true if name is all letters.
+ * Checks if string is all alphabetical and not empty.
+ * @param $name string input
+ * @return bool true if string is all letters.
  */
 
 function validString($string)
@@ -67,7 +67,7 @@ function validString($string)
 
 /**
  * Checks if age is all numbers, over 18 (not inclusive).
- * @param $age user input for age.
+ * @param $age int, user input for age.
  * @return bool true if all numbers, over 18 (not inclusive).
  */
 
@@ -87,7 +87,7 @@ function validAge($age)
  * @return $errors sets $errors to empty if conditions true
  */
 
-function validatePersonalInfo($name, $age, $phone, $gender)
+/*function validatePersonalInfo($name, $age, $phone, $gender)
 {
     if (validName($name) && validAge($age) && validPhone($phone) && !empty($gender)) {
         unset($errors);
@@ -96,7 +96,7 @@ function validatePersonalInfo($name, $age, $phone, $gender)
     return $errors;
 }
 
-/*function validateInterests($indoorInterests, $outdoorInterests)
+function validateInterests($indoorInterests, $outdoorInterests)
 {
     if (validOutdoor($outdoorInterests)&& validIndoor($indoorInterests)) {
         unset($errors);
@@ -105,7 +105,5 @@ function validatePersonalInfo($name, $age, $phone, $gender)
     return $errors;
 }*/
 
-
-//$errors = validatePersonalInfo($name, $age, $phone, $gender);
 
 $success = sizeof($errors) == 0;

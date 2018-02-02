@@ -1,11 +1,13 @@
 <?php
 /*
- * Created by PhpStorm.
- * User: JenShin
+ * This is the controller for a dating website.
  * Date: 1/16/18
  * Time: 11:59 AM
- * index.php, controller, for dating website
+ * index.php
+ * @author Jen Shin <jshin@mail.greenriver.edu>
+ * @copyright 2018
  */
+
 session_start();
 
 //require the autoload file
