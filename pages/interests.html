@@ -40,12 +40,11 @@ interests for dating website
         <div class="row">
             <div class="col-sm-10 mt-1 ">
                 <h6 class="strong">Indoor Interests</h6>
-                <table class="table">
+                <!--<table class="table">
                     <tbody>
                     <tr class="border-0">
 
                         <repeat group="{{ @indoor }}" value = "{{ @indoorOptions }}">
-                            <!--<div class="col-sm-4">-->
                             <td class="w-25"><input type = "checkbox" name="indoorList[]" value="{{ @indoorOptions }}" <check if="{{
                             isset($_POST['submit']) && !empty($_POST['indoorList']) && in_array(@indoorOptions, $_POST['indoorList'])}}">checked</check>>&nbsp&nbsp{{ @indoorOptions }}</td>
                             <check if="{{ @indoorOptions == 'board games' }}"></tr><tr class="border-0"></check>
@@ -55,19 +54,31 @@ interests for dating website
                         </check>
                     </tr>
                     </tbody>
-                </table>
+                </table>-->
             </div>
+        </div>
+
+        <div class="row ml-1">
+            <repeat group="{{ @indoor }}" value = "{{ @indoorOptions }}">
+                <!--<div class="col-sm-4">-->
+                <div class="form-control col-md-3"><input type = "checkbox" name="indoorList[]" value="{{ @indoorOptions }}" <check if="{{
+                            isset($_POST['submit']) && !empty($_POST['indoorList']) && in_array(@indoorOptions, $_POST['indoorList'])}}">checked</check>>&nbsp&nbsp{{ @indoorOptions }}</div>
+                <!--<check if="{{ @indoorOptions == 'board games' }}"><br></check>-->
+            </repeat>
+            <check if="{{ @errors['indoor'] }}">
+                <p class="text-danger">{{ @errors['indoor'] }}</p>
+            </check>
         </div>
 
         <div class="row">
             <div class="col-sm-10 mt-1 ">
                 <h6 class="strong">Outdoor Interests</h6>
-                <table class="table">
+                <!--<table class="table">
                     <tbody>
                     <tr>
 
                         <repeat group="{{ @outdoor }}" value = "{{ @outdoorOptions }}">
-                            <!--<div class="col-sm-4">-->
+
                             <td class="w-25"><input type = "checkbox" name="outdoorList[]" value="{{ @outdoorOptions }}" <check if="{{
                             isset($_POST['submit']) && !empty($_POST['outdoorList']) && in_array(@outdoorOptions, $_POST['outdoorList'])}}">checked</check>>&nbsp&nbsp{{ @outdoorOptions }}</td>
                             <check if="{{ @outdoorOptions == 'collecting' }}"></tr><tr></check>
@@ -77,23 +88,38 @@ interests for dating website
                         </check>
                     </tr>
                     </tbody>
-                </table>
-            </div>
-            <check if="{{ @errors['emptyInterests'] }}">
-                <p class="text-danger ml-3">{{ @errors['emptyInterests'] }}</p>
-            </check>
-            <check if="{{ @errors['oneEmpty'] }}">
-                <p class="text-danger ml-3">{{ @errors['oneEmpty'] }}</p>
-            </check>
-        </div>
-
-        <div class="col-sm-12 mt-2">
-            <div class="col-md-11 text-right mb-4">
-                    <input type="submit" class="btn btn-primary" name="submit" value="Next >">
+                </table>-->
 
             </div>
         </div>
 
+        <div class="row ml-1">
+            <repeat group="{{ @outdoor }}" value = "{{ @outdoorOptions }}">
+                <!--<div class="col-sm-4">-->
+                <div class="form-control col-md-3"><input type = "checkbox" name="outdoorList[]" value="{{ @outdoorOptions }}" <check if="{{
+                            isset($_POST['submit']) && !empty($_POST['outdoorList']) && in_array(@outdoorOptions, $_POST['outdoorList'])}}">checked</check>>&nbsp&nbsp{{ @outdoorOptions }}</div>
+                <!--<check if="{{ @outdoorOptions == 'collecting' }}"><br></check>-->
+            </repeat>
+
+            <br>
+
+        </div>
+
+        <div class="row">
+
+            <div class="col-sm mt-2">
+                <check if="{{ @errors['emptyInterests'] }}">
+                    <p class="text-danger ml-3">{{ @errors['emptyInterests'] }}</p>
+                </check>
+                <check if="{{ @errors['oneEmpty'] }}">
+                    <p class="text-danger ml-3">{{ @errors['oneEmpty'] }}</p>
+                </check>
+                <div class="text-right mb-4">
+                        <input type="submit" class="btn btn-primary" name="submit" value="Next >">
+
+                </div>
+            </div>
+        </div>
     </form>
 </div>
 
