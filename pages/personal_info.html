@@ -78,6 +78,10 @@ personal information page for dating website
                 <p class="text-danger">{{ @errors['phone'] }}</p>
             </check>
 
+            <label><span class="strong">Premium Membership</span><br/>
+                <input type = "checkbox" name="premium" <check if="{{ isset($_POST['submit'])
+                && isset($_POST['premium']) }}">checked</check> />Sign me up for a Premium Account!</label>
+
         </div>
 
         <div class="col-md-4 mt-3 ml-4">

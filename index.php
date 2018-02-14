@@ -8,10 +8,11 @@
  * @copyright 2018
  */
 
-session_start();
 
 //require the autoload file
 require_once ('vendor/autoload.php');
+session_start();
+
 
 //create an instance of Base class
 $f3 = Base::instance();
@@ -107,6 +108,7 @@ $f3->route('GET|POST /personal', function($f3) {
         $gender = $_POST['gender'];
         $phone = $_POST['phone'];
         $errors = $_POST['errors'];
+        $premium = $_POST['premium'];
 
         include ('model/validate.php');
         if(!validPhone($phone))
@@ -146,6 +148,7 @@ $f3->route('GET|POST /personal', function($f3) {
         $f3->set('phone', $phone);
         $f3->set('errors', $errors);
         $f3->set('success', $success);
+        $f3->set('premium', $premium);
 
         $_SESSION['name'] = $name;
         $_SESSION['age'] = $age;
