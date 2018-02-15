@@ -39,32 +39,33 @@ results for dating website
                     <table class="w-100 mt-2">
                         <tbody>
                             <tr class="border-bottom border-muted">
-                                <td class="p-3" >Name: {{ $_SESSION['name'] }}</td>
+                                <td class="p-3" >Name: {{ @fname }}</td>
                             </tr>
                             <tr class="border-bottom border-muted">
-                                <td class="p-3">Gender: {{ ucfirst($_SESSION['gender']) }}</td>
+                                <td class="p-3">Gender: {{ @gender }}</td>
                             </tr>
                             <tr class="border-bottom border-muted ">
-                                <td class="p-3">Age: {{ $_SESSION['age'] }}</td>
+                                <td class="p-3">Age: {{ @age }}</td>
                             </tr>
                             <tr class="border-bottom border-muted">
-                                <td class="p-3">Phone: {{ $_SESSION['phone'] }}</td>
+                                <td class="p-3">Phone: {{ @phone }}</td>
                             </tr>
                             <tr class="border-bottom border-muted">
-                                <td class="p-3">Email: {{ $_SESSION['email'] }}</td>
+                                <td class="p-3">Email: {{ @email }}</td>
                             </tr>
                             <tr class="border-bottom border-muted">
-                                <td class="p-3">State: {{ strtoupper($_SESSION['state']) }}</td>
+                                <td class="p-3">State: {{ strtoupper(@state) }} </td>
                             </tr>
                             <tr class="border-bottom border-muted">
-                                <td class="p-3">Seeking: {{ ucfirst($_SESSION['seeking']) }}</td>
+                                <td class="p-3">Seeking: {{ ucfirst(@seeking) }}</td>
                             </tr>
+                            <check if ="{{ isset(@indoorChosen) }}">
                             <tr>
-                                <td class="p-3">Interests: <repeat group="{{ $_SESSION['indoorInterests']
+                                <td class="p-3">Interests: <repeat group="{{ @indoorChosen
                                 }}" value="{{ @indoorInterest }}">{{ @indoorInterest}} </repeat>
-                                    <repeat group="{{ $_SESSION['outdoorInterests'] }}" value="{{ @outdoorInterest
+                                    <repeat group="{{ @outdoorChosen }}" value="{{ @outdoorInterest
                                     }}">{{ @outdoorInterest}} </repeat></td>
-                            </tr>
+                            </tr></check>
                         </tbody>
                     </table>
                 </div>
@@ -77,7 +78,7 @@ results for dating website
                 </div>
                 <h5>Biography</h5>
 
-                <p class="text-center">{{ $_SESSION['biography']}}</p>
+                <p class="text-center">{{ @bio }}</p>
             </div>
         </div>
 

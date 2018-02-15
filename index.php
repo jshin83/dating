@@ -108,7 +108,6 @@ $f3->route('GET|POST /personal', function($f3) {
         $gender = $_POST['gender'];
         $phone = $_POST['phone'];
         $errors = $_POST['errors'];
-        $member = "";
 
         include ('model/validate.php');
         if(!validPhone($phone))
@@ -148,6 +147,7 @@ $f3->route('GET|POST /personal', function($f3) {
         $f3->set('phone', $phone);
         $f3->set('errors', $errors);
         $f3->set('success', $success);
+        $f3->set('name', $name);
         //$f3->set('premium', $premium);
 
 
@@ -168,7 +168,7 @@ $f3->route('GET|POST /personal', function($f3) {
                 $member = new PremiumMember($first, $last, $age, $gender, $phone);
             } else {
                 //instantiate Member
-                $member = new Member();
+                $member = new Member($first, $last, $age, $gender, $phone);
             }
             $_SESSION['member'] = $member;
 
@@ -183,10 +183,9 @@ $f3->route('GET|POST /personal', function($f3) {
 
 //profile page
 $f3->route('GET|POST @profile: /profile', function($f3) {
-    //testing only
     $member = $_SESSION['member'];
+    //print_r($member); //testing only
 
-    print_r($member);
 
     if(isset($_POST['submit'])) {
         $state = $_POST['state'];
@@ -294,13 +293,17 @@ $f3->route('GET|POST @interests: /interests', function($f3) {
         $f3->set('errors', $errors);
         $f3->set('success', $success);
 
-        $_SESSION['indoorInterests'] = $indoorInterests;
+       /* $_SESSION['indoorInterests'] = $indoorInterests;
         $_SESSION['outdoorInterests'] = $outdoorInterests;
 
-
+*/
         $success = (sizeof($errors) == 0);
 
         if($success) {
+            $member->setIndoor($indoorInterests);
+            $member->setOutdoor($outdoorInterests);
+            $_SESSION['member'] = $member;
+
             //redirect to results
             $f3->reroute('@results');
         }
@@ -310,14 +313,39 @@ $f3->route('GET|POST @interests: /interests', function($f3) {
 });
 
 //results
-$f3->route('GET|POST @results: /results', function() {
-    //testing only
+$f3->route('GET|POST @results: /results', function($f3) {
+    //    print_r($member); //testing only
     $member = $_SESSION['member'];
 
-    print_r($member);
+    $fname = $member->getFname();
+    $lname = $member->getLname();
+    $email = $member->getEmail();
+    $age = $member->getAge();
+    $gender = $member->getGender();
+    $seeking = $member->getSeeking();
+    $phone = $member->getPhone();
+    $state = $member->getState();
+    $bio = $member->getBio();
+
+    $f3->set('fname', $fname);
+    $f3->set('lname', $lname);
+    $f3->set('email', $email);
+    $f3->set('age', $age);
+    $f3->set('gender', $gender);
+    $f3->set('seeking', $seeking);
+    $f3->set('phone', $phone);
+    $f3->set('state', $state);
+    $f3->set('bio', $bio);
+    if ($member instanceof PremiumMember) {
+        $outdoorInterests = $member->getOutdoor();
+        $indoorInterests = $member->getIndoor();
+        $f3->set('outdoorChosen', $outdoorInterests);
+        $f3->set('indoorChosen', $indoorInterests);
+    }
 
     $view = new Template();
     echo $view -> render('pages/results.html');
+    //session_destroy();
 });
 
 //run fat free
