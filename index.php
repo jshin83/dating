@@ -108,7 +108,7 @@ $f3->route('GET|POST /personal', function($f3) {
         $gender = $_POST['gender'];
         $phone = $_POST['phone'];
         $errors = $_POST['errors'];
-        $premium = $_POST['premium'];
+        $member = "";
 
         include ('model/validate.php');
         if(!validPhone($phone))
@@ -148,16 +148,30 @@ $f3->route('GET|POST /personal', function($f3) {
         $f3->set('phone', $phone);
         $f3->set('errors', $errors);
         $f3->set('success', $success);
-        $f3->set('premium', $premium);
+        //$f3->set('premium', $premium);
 
+
+/*
         $_SESSION['name'] = $name;
         $_SESSION['age'] = $age;
         $_SESSION['gender'] = $gender;
         $_SESSION['phone'] = $phone;
+*/
 
         $success = (sizeof($errors) == 0);
 
         if($success) {
+            //save profile object to session
+
+            if(isset($_POST['premium'])) {
+                //instantiate Premium Member
+                $member = new PremiumMember($first, $last, $age, $gender, $phone);
+            } else {
+                //instantiate Member
+                $member = new Member();
+            }
+            $_SESSION['member'] = $member;
+
             //redirect to profile
             $f3->reroute('@profile');
         }
@@ -169,13 +183,18 @@ $f3->route('GET|POST /personal', function($f3) {
 
 //profile page
 $f3->route('GET|POST @profile: /profile', function($f3) {
-    //print_r($_POST); testing only
+    //testing only
+    $member = $_SESSION['member'];
+
+    print_r($member);
+
     if(isset($_POST['submit'])) {
         $state = $_POST['state'];
         $email = $_POST['email'];
         $seeking = $_POST['seeking'];
         $biography = htmlspecialchars($_POST['biography']);
         $errors = $_POST['errors'];
+
 
         include ('model/validate.php');
 
@@ -204,17 +223,35 @@ $f3->route('GET|POST @profile: /profile', function($f3) {
         $f3->set('biography', $biography);
         $f3->set('errors', $errors);
         $f3->set('success', $success);
-
+/*
         $_SESSION['state'] = $state;
         $_SESSION['email'] = $email;
         $_SESSION['seeking'] = $seeking;
         $_SESSION['biography'] = $biography;
-
+*/
         $success = (sizeof($errors) == 0);
 
         if($success) {
-            //redirect to interests
-            $f3->reroute('@interests');
+
+            if ($member instanceof PremiumMember) {
+                $member -> setState($state);
+                $member -> setEmail($email);
+                $member -> setSeeking($seeking);
+                $member -> setBio($biography);
+                $_SESSION['member'] = $member;
+
+                //redirect to interests
+                $f3->reroute('@interests');
+            } else {
+                $member -> setState($state);
+                $member -> setEmail($email);
+                $member -> setSeeking($seeking);
+                $member -> setBio($biography);
+                $_SESSION['member'] = $member;
+
+                //skip interests, route to results
+                $f3->reroute('@results');
+            }
         }
 }
     $view = new Template();
@@ -224,6 +261,10 @@ $f3->route('GET|POST @profile: /profile', function($f3) {
 //interests
 $f3->route('GET|POST @interests: /interests', function($f3) {
     //print_r($_POST);
+    //testing only
+    $member = $_SESSION['member'];
+
+    print_r($member);
 
     if(isset($_POST['submit'])) {
         $indoorInterests = $_POST['indoorList'];
@@ -270,6 +311,10 @@ $f3->route('GET|POST @interests: /interests', function($f3) {
 
 //results
 $f3->route('GET|POST @results: /results', function() {
+    //testing only
+    $member = $_SESSION['member'];
+
+    print_r($member);
 
     $view = new Template();
     echo $view -> render('pages/results.html');

@@ -61,7 +61,7 @@ interests for dating website
         <div class="row ml-1">
             <repeat group="{{ @indoor }}" value = "{{ @indoorOptions }}">
                 <!--<div class="col-sm-4">-->
-                <div class="form-control col-md-3"><input type = "checkbox" name="indoorList[]" value="{{ @indoorOptions }}" <check if="{{
+                <div class="form-control col-sm-3"><input type = "checkbox" name="indoorList[]" value="{{ @indoorOptions }}" <check if="{{
                             isset($_POST['submit']) && !empty($_POST['indoorList']) && in_array(@indoorOptions, $_POST['indoorList'])}}">checked</check>>&nbsp&nbsp{{ @indoorOptions }}</div>
                 <!--<check if="{{ @indoorOptions == 'board games' }}"><br></check>-->
             </repeat>
@@ -96,7 +96,7 @@ interests for dating website
         <div class="row ml-1">
             <repeat group="{{ @outdoor }}" value = "{{ @outdoorOptions }}">
                 <!--<div class="col-sm-4">-->
-                <div class="form-control col-md-3"><input type = "checkbox" name="outdoorList[]" value="{{ @outdoorOptions }}" <check if="{{
+                <div class="form-control col-sm-3"><input type = "checkbox" name="outdoorList[]" value="{{ @outdoorOptions }}" <check if="{{
                             isset($_POST['submit']) && !empty($_POST['outdoorList']) && in_array(@outdoorOptions, $_POST['outdoorList'])}}">checked</check>>&nbsp&nbsp{{ @outdoorOptions }}</div>
                 <!--<check if="{{ @outdoorOptions == 'collecting' }}"><br></check>-->
             </repeat>
