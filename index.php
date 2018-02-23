@@ -263,8 +263,6 @@ $f3->route('GET|POST @interests: /interests', function($f3) {
     //testing only
     $member = $_SESSION['member'];
 
-    print_r($member);
-
     if(isset($_POST['submit'])) {
         $indoorInterests = $_POST['indoorList'];
         $outdoorInterests = $_POST['outdoorList'];
