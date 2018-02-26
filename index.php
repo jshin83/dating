@@ -270,10 +270,11 @@ $f3->route('GET|POST @profile: /profile', function($f3) {
 
         if($state=="--Select--") {
             $errors['state'] = "Required: choose a state";
-        }
-        foreach ($states as $stateKey => $value) {
-            if($state == $value) {
-                $state = $stateKey;
+        } else {
+            foreach ($states as $stateKey => $value) {
+                if ($state == $value) {
+                    $state = $stateKey;
+                }
             }
         }
 
@@ -417,5 +418,9 @@ $f3->route('GET|POST @results: /results', function($f3) {
     //session_destroy();
 });
 
+$f3->route('GET @admin: /admin', function() {
+    $view = new Template();
+    echo $view -> render('pages/admin.html');
+});
 //run fat free
 $f3->run();
