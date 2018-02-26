@@ -23,7 +23,7 @@ PRIMARY KEY (member_id)
  */
 
 require_once ('/home/jshingre/config.php');
-;
+
 abstract class DataObject {
     protected $data = array();
     public function __construct( $data ) {
@@ -57,4 +57,3 @@ abstract class DataObject {
     }
 
 }
-?>

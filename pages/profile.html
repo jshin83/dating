@@ -4,7 +4,6 @@ Jennifer Shin
 profile.html
 profile information page for dating website
 -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,6 +23,11 @@ profile information page for dating website
 <header>
     <nav class="navbar navbar-light bg-light mt-2">
         <a class="navbar-brand" href="#">My Dating Website</a>
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link active" href="admin.html">Admin</a>
+            </li>
+        </ul>
     </nav>
 </header>
 <body>
@@ -35,7 +39,7 @@ profile information page for dating website
     <hr/>
 
 
-    <form method="post" <check if="{{ @success }}">action="./interests"</check> action="#">
+    <form method="post" action="#">
 
         <div class="row">
             <div class="col-md-6">
@@ -52,10 +56,10 @@ profile information page for dating website
 
                 <select class="form-control border border-secondary" name="state" id="state">
                     <option>--Select--</option>
-                    <repeat group="{{ @states }}" value="{{ @stateOption }}">
+                    <repeat group="{{ @states }}" key = "{{ @stateKey }}" value="{{ @stateValue }}">
                         <option
-                        <check if="{{ @stateOption == @state }}">selected</check>>
-                        {{ @stateOption }}
+                        <check if="{{ @stateValue == @state }}">selected</check>>
+                        {{ @stateValue }}
                         </option>
                     </repeat>
                 </select>

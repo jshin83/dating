@@ -4,7 +4,6 @@ Jennifer Shin
 personal_info.html
 personal information page for dating website
 -->
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -24,6 +23,11 @@ personal information page for dating website
 <header>
     <nav class="navbar navbar-light bg-light mt-2">
         <a class="navbar-brand" href="#">My Dating Website</a>
+        <ul class="nav justify-content-end">
+            <li class="nav-item">
+                <a class="nav-link active" href="admin.html">Admin</a>
+            </li>
+        </ul>
     </nav>
 </header>
 <body>
@@ -34,9 +38,6 @@ personal information page for dating website
     <h1 class="mt-5 ml-4">Personal Information</h1>
     <hr class="ml-4"/>
 
-    <check if="{{ @success}}">
-        <form method="post" action="./profile">
-    </check>
     <form method="post" action="#">
 
     <div class="row">
