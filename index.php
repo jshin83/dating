@@ -157,7 +157,6 @@ $f3->set('outdoor', array(
    'climbing'
 ));
 
-
 //set default path to page/home
 $f3->route('GET /', function() {
     $view = new Template();
@@ -406,12 +405,40 @@ $f3->route('GET|POST @results: /results', function($f3) {
     $f3->set('phone', $phone);
     $f3->set('state', $state);
     $f3->set('bio', $bio);
+
+    //grab states
+    $states = $f3->get('states');
+    //set state to Abbrev for sql insertion
+    foreach ($states as $key => $value) {
+        if($value == $state) {
+            $state = $key;
+        }
+    }
+    $member -> setState($state);
+    $gender = $member->getGender();
+    $seeking = $member->getSeeking();
+    //set gender to f or m for sql insertion
+    if ($gender == "female") {
+        $member -> setGender('f');
+    } else {
+        $member -> setGender('m');
+    }
+    //set seeking to f or m for sql insertion
+    if ($seeking == "female") {
+        $member -> setGender('f');
+    } else {
+        $member -> setGender('m');
+    }
+
     if ($member instanceof PremiumMember) {
         $outdoorInterests = $member->getOutdoor();
         $indoorInterests = $member->getIndoor();
         $f3->set('outdoorChosen', $outdoorInterests);
         $f3->set('indoorChosen', $indoorInterests);
     }
+
+    //add to database
+    $member->addToDatabase();
 
     $view = new Template();
     echo $view -> render('pages/results.html');

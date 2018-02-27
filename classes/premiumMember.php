@@ -15,6 +15,7 @@ class PremiumMember extends Member
 {
     private $_inDoorInterests;
     private $_outDoorInterests;
+    private $_premium;
 
     /**
      * PremiumMember constructor, extends from Member.
@@ -31,6 +32,7 @@ class PremiumMember extends Member
 
         $this->_inDoorInterests="";
         $this->_outDoorInterests="";
+        $this->_premium = 1;
     }
 
 
@@ -252,5 +254,33 @@ class PremiumMember extends Member
     function setOutdoor($outdoorInterests)
     {
         $this->_outDoorInterests = $outdoorInterests;
+    }
+
+    function getPremium()
+    {
+        return 1;
+    }
+
+    /**
+     * Checks if age is all numbers, over 18 (inclusive).
+     * @param $age int, user input for age.
+     * @return bool true if all numbers, over 18 (inclusive).
+     */
+
+    function validAge($age)
+    {
+        return is_numeric($age) && $age >= 18;
+    }
+
+    /**
+     * Validates an email.
+     * @param $email string
+     * @return false|int false if it does not match the pattern
+     */
+
+    function validEmail($email)
+    {
+        $regex = '/^([a-zA-Z0-9_\-\.]+)@([a-zA-Z0-9_\-\.]+)\.([a-zA-Z]{2,5})$/';
+        return preg_match($regex, $email);
     }
 }

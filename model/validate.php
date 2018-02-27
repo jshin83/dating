@@ -66,15 +66,17 @@ function validString($string)
 }
 
 /**
- * Checks if age is all numbers, over 18 (not inclusive).
+ * Checks if age is all numbers, over 18 (inclusive).
  * @param $age int, user input for age.
- * @return bool true if all numbers, over 18 (not inclusive).
+ * @return bool true if all numbers, over 18 (inclusive).
  */
 
 function validAge($age)
 {
     return is_numeric($age) && $age >= 18;
 }
+
+
 
 /**
  * Success if all data is valid
