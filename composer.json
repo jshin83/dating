@@ -13,6 +13,6 @@
   },
   "autoload": {
     "classmap": ["classes/"],
-    "classpath": ["model/"]
+    "classpath": ["model/DataObject.class.php"]
   }
 }

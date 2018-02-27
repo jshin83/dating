@@ -415,8 +415,6 @@ $f3->route('GET|POST @results: /results', function($f3) {
         }
     }
     $member -> setState($state);
-    $gender = $member->getGender();
-    $seeking = $member->getSeeking();
     //set gender to f or m for sql insertion
     if ($gender == "female") {
         $member -> setGender('f');
@@ -425,9 +423,9 @@ $f3->route('GET|POST @results: /results', function($f3) {
     }
     //set seeking to f or m for sql insertion
     if ($seeking == "female") {
-        $member -> setGender('f');
+        $member -> setSeeking('f');
     } else {
-        $member -> setGender('m');
+        $member -> setSeeking('m');
     }
 
     if ($member instanceof PremiumMember) {
@@ -435,6 +433,7 @@ $f3->route('GET|POST @results: /results', function($f3) {
         $indoorInterests = $member->getIndoor();
         $f3->set('outdoorChosen', $outdoorInterests);
         $f3->set('indoorChosen', $indoorInterests);
+        $member->setCombinedInterests($indoorInterests, $outdoorInterests);
     }
 
     //add to database

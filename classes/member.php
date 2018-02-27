@@ -22,6 +22,7 @@ class Member extends DataObject
     protected $seeking;
     protected $bio;
     protected $premium;
+    protected $image;
 
     /*protected $data = array (
         'fname' => "",
@@ -52,6 +53,7 @@ class Member extends DataObject
         $this->gender = $gender;
         $this->phone = $phone;
         $this->premium = 0;
+        $this->image = null;
     }
 
     /**
@@ -263,6 +265,27 @@ class Member extends DataObject
         $this->bio = $bio;
     }
 
+    /**
+     * Set premium.
+     * @param $int int, 1 if premium, 0 if member
+     */
+
+    function setPremium($int)
+    {
+        $this->premium = $int;
+    }
+
+    /**
+     * Returns premium status.
+     * @return int 1 for premium, 0 for member
+     */
+    function getPremium()
+    {
+        return $this->premium;
+    }
+    /**
+     * Adds member information to database.
+     */
     function addToDatabase()
     {
         $conn = parent::connect();
