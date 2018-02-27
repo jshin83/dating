@@ -12,7 +12,6 @@
     "bcosca/fatfree-core": "dev-master"
   },
   "autoload": {
-    "classmap": ["classes/"],
-    "classpath": ["model/DataObject.class.php"]
+    "classmap": ["classes/", "model/"]
   }
 }

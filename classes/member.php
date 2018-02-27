@@ -8,9 +8,8 @@
  * @copyright 2018
  */
 
-require_once '/home/jshingre/public_html/328/dating/model/DataObject.class.php';
 
-class Member extends DataObject
+class Member
 {
     protected $fname;
     protected $lname;
@@ -23,19 +22,6 @@ class Member extends DataObject
     protected $bio;
     protected $premium;
     protected $image;
-
-    /*protected $data = array (
-        'fname' => "",
-        'lname' => "",
-        'age' => "",
-        'gender' => "",
-        'phone' => "",
-        'email' => "",
-        'state' => "",
-        'seeking' => "",
-        'bio' => ""
-
-    );*/
 
     /**
      * Member constructor.
@@ -283,49 +269,21 @@ class Member extends DataObject
     {
         return $this->premium;
     }
+
     /**
-     * Adds member information to database.
+     * Sets image.
      */
-    function addToDatabase()
+    function setImage()
     {
-        $conn = parent::connect();
+        $this->image = null;
+    }
 
-        /*fname VARCHAR(30) NOT NULL,
-lname VARCHAR(30) NOT NULL,
-age TINYINT DEFAULT NULL,
-gender ENUM( 'f', 'm' ) NOT NULL,
-phone VARCHAR(13) NOT NULL,
-email VARCHAR(50) NOT NULL UNIQUE,
-state CHAR(2) NOT NULL,
-seeking ENUM( 'f', 'm' ) NOT NULL,
-bio TEXT NOT NULL DEFAULT "",
-premium TINYINT(1) NOT NULL DEFAULT 0,
-image VARCHAR(50) DEFAULT NULL,
-interests VARCHAR(130) NOT NULL,*/
-
-        //define the query
-        $sql="INSERT INTO Members(fname, lname, age, gender, phone, email, state, seeking, bio, premium, image, interests) 
-            VALUES (:fname, :lname, :age, :gender, :phone, :email, :state, :seeking, :bio, :premium, :image, :interests)";
-
-        //prepare statement
-        $statement = $conn->prepare($sql);
-
-        //bind the paramenters
-
-        $statement->bindParam(':fname', $this->fname, PDO::PARAM_STR);
-        $statement->bindParam(':lname', $this->lname, PDO::PARAM_STR);
-        $statement->bindParam(':age', $this->age, PDO::PARAM_INT);
-        $statement->bindParam(':gender', $this->gender, PDO::PARAM_STR);
-        $statement->bindParam(':phone', $this->phone, PDO::PARAM_STR);
-        $statement->bindParam(':email', $this->email, PDO::PARAM_STR);
-        $statement->bindParam(':state', $this->state, PDO::PARAM_STR);
-        $statement->bindParam(':seeking', $this->seeking, PDO::PARAM_STR);
-        $statement->bindParam(':bio', $this->bio, PDO::PARAM_STR);
-        $statement->bindParam(':premium', $this->premium, PDO::PARAM_INT);
-        $statement->bindParam(':image', $this->image, PDO::PARAM_STR);
-        $statement->bindParam(':interests', $this->interests, PDO::PARAM_STR);
-
-        //execute
-        $statement->execute();
+    /**
+     * Returns image.
+     * @return null
+     */
+    function getImage()
+    {
+        return $this->image;
     }
 }

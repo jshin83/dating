@@ -27,38 +27,12 @@ admin page for dating website
 <body>
 <div class="container mt-3 mb-2">
     <h2>Membership</h2>
-    <div class="row font-weight-bold">
-        <div class="col-sm display: inline-block">
-            ID
-        </div>
-        <div class="col-sm display: inline-block">
-            Name
-        </div>
-        <div class="col-sm display: inline-block ">
-            Age
-        </div>
-        <div class="col-sm ">
-            Phone
-        </div>
-        <div class="col-sm  ">
-            Email
-        </div>
-        <div class="col-sm  ">
-            State
-        </div>
-        <div class="col-sm ">
-            Gender
-        </div>
-        <div class="col-sm ">
-            Seeking
-        </div>
-        <div class="col-sm ">
-            Premium
-        </div>
-        <div class="col-sm ">
-            Interests
-        </div>
-    </div>
+    <ol>
+        <repeat group="{{ @allMembers }}" value="{{ @indiv }}">
+            <li><a href="{{ @BASE }}/summary/{{ @indiv['member_id'] }}"  target="_blank" >{{ @indiv['lname'] }}, {{ @indiv['fname'] }}</a></li>
+
+        </repeat>
+    </ol>
     <hr/>
 
 </div>

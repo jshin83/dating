@@ -19,6 +19,8 @@ $f3 = Base::instance();
 
 $f3->set('DEBUG', 3);
 
+$conn = new DataObject();
+
 /*$f3->set('states', array(
 
     'Alabama',
@@ -162,6 +164,7 @@ $f3->route('GET /', function() {
     $view = new Template();
     echo $view -> render('pages/home.html');
 });
+
 
 //personal info page
 $f3->route('GET|POST /personal', function($f3) {
@@ -396,6 +399,7 @@ $f3->route('GET|POST @results: /results', function($f3) {
     $state = $member->getState();
     $bio = $member->getBio();
 
+
     $f3->set('fname', $fname);
     $f3->set('lname', $lname);
     $f3->set('email', $email);
@@ -437,16 +441,36 @@ $f3->route('GET|POST @results: /results', function($f3) {
     }
 
     //add to database
-    $member->addToDatabase();
+    $GLOBALS['conn']->addToDatabase($member);
 
     $view = new Template();
     echo $view -> render('pages/results.html');
     //session_destroy();
 });
 
-$f3->route('GET @admin: /admin', function() {
+$f3->route('GET @admin: /admin', function($f3) {
+    $allMembers = $GLOBALS['conn']->displayAll();
+    $f3->set('allMembers', $allMembers);
+
+    //load a template
     $view = new Template();
     echo $view -> render('pages/admin.html');
 });
+
+
+$f3->route('GET /summary/@member_id', function($f3, $params) {
+    $id = $params['member_id'];
+
+    $indivmember = $GLOBALS['conn']->displaySingle($id);
+
+    $f3->set('indivmember', $indivmember);
+
+    // $_SESSION['student']=$student;
+
+    $template = new Template();
+    echo $template->render('pages/view-member.html');
+});
+
+
 //run fat free
 $f3->run();
