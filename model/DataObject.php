@@ -2,12 +2,13 @@
 /**
  * Date: 2/22/18
  * Time: 7:07 PM
- * DataObject.class.php
+ * DataObject.php
  *
  * @author Jen Shin <jshin13@mail.greenriver.edu>
  * @copyright 2018
  *
- * This class creates a database connection.
+ * This class creates a database connection
+ * and controls database interaction.
  *
  * CREATE TABLE Members (
 member_id INT UNSIGNED NOT NULL AUTO_INCREMENT,
@@ -34,25 +35,6 @@ PRIMARY KEY (member_id)
  */
 class DataObject {
     private $_conn;
-    /*
-    protected $data = array();
-
-    public function __construct( $data ) {
-        foreach ( $data as $key => $value ) {
-            if ( array_key_exists( $key, $this-> data ) ) $this-> data[$key] =
-                $value;
-        }
-    }
-    public function getValue( $field ) {
-        if ( array_key_exists( $field, $this-> data ) ) {
-            return $this-> data[$field];
-        } else {
-            die( 'Field not found' );
-        }
-    }
-    public function getValueEncoded( $field ) {
-        return htmlspecialchars( $this-> getValue( $field ) );
-    }*/
 
     /**
      * Connects to a database.
@@ -76,7 +58,7 @@ class DataObject {
      */
      function addToDatabase($member)
      {
-        $interests = "";
+        $interests = null;
         if(is_a($member, "PremiumMember" )) {
             $interests = $member->getCombinedInterests();
         }
@@ -123,29 +105,20 @@ class DataObject {
         $row = $statement->fetch();
 
         if(empty($row)) {
-            echo "ID not found.";
-        } else {
-
-            $out = 'ID : '.$id.' - ';
-            $out .= "Name: ".$row['fname']." ".$row['lname']." - ";
-            $out .= "Gender: ".strtoupper($row['gender'])." - ";
-            $out .= "Age: ".$row['age']." - ";
-            $out .= "Seeking: ".strtoupper($row['seeking'])." - ";
-            $out .= "Age: ".$row['age']." - ";
-            $out .= "State: ".$row['state'];
-            if($row['premium'] == 1) {
-                $out .= " - Interests: ".$row['interests']."";
-            }
-
-            return $out;
-
+            return "ID not found.";
         }
+        return $row;
     }
+
+    /**
+     * Selects all members from Members table.
+     * @return array rows, each row holds a member's data
+     */
 
     function displayAll()
     {
         //define query
-        $sql="SELECT member_id, fname, lname, age, phone, email, state, gender, seeking, premium, interests FROM Members";
+        $sql="SELECT member_id, fname, lname, age, phone, email, state, gender, seeking, premium, interests FROM Members ORDER BY lname";
         $statement = $this->_conn->prepare($sql);
         $statement->execute();
 

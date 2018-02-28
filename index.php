@@ -448,6 +448,7 @@ $f3->route('GET|POST @results: /results', function($f3) {
     //session_destroy();
 });
 
+//admin page
 $f3->route('GET @admin: /admin', function($f3) {
     $allMembers = $GLOBALS['conn']->displayAll();
     $f3->set('allMembers', $allMembers);
@@ -457,13 +458,13 @@ $f3->route('GET @admin: /admin', function($f3) {
     echo $view -> render('pages/admin.html');
 });
 
-
+//individual member page - extra credit
 $f3->route('GET /summary/@member_id', function($f3, $params) {
     $id = $params['member_id'];
 
-    $indivmember = $GLOBALS['conn']->displaySingle($id);
+    $row = $GLOBALS['conn']->displaySingle($id);
 
-    $f3->set('indivmember', $indivmember);
+    $f3->set('row', $row);
 
     // $_SESSION['student']=$student;
 

@@ -1,0 +1,79 @@
+<!--
+Jennifer Shin
+27 Feb 2018
+view-member.html
+individual member information page for dating website
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title> Member Information </title>
+
+
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+
+    <link rel="stylesheet" href="http://jshin.greenriverdev.com/328/dating/styles/styles.css">
+
+
+</head>
+<header>
+    <nav class="navbar navbar-light bg-light mt-2">
+        <a class="navbar-brand" href="#">My Dating Website</a>
+
+    </nav>
+</header>
+
+<body>
+<div class="container border border-muted rounded mt-3 px-4">
+    <h3>Member information</h3>
+    <div class="mx-3">
+
+        <p> <span class= "font-weight-bold">ID:</span> {{ @row['member_id' ]}}<br/>
+            <span class= "font-weight-bold">Name: </span>{{ @row['fname'] }} {{ $row['lname'] }}<br/>
+            <span class= "font-weight-bold">Gender:</span> <check if=" {{ @row['gender'] }} == 'f'">
+                <true>
+                    Female
+                </true>
+                <false>
+                    Male
+                </false>
+            </check>
+            <br/>
+            <span class= "font-weight-bold">Age:</span> {{ @row['age'] }} <br/>
+            <span class= "font-weight-bold">Seeking:</span> <check if=" {{ @row['seeking'] }} == 'f'">
+                <true>
+                    Female
+                </true>
+                <false>
+                    Male
+                </false>
+            </check>
+
+            <br/>
+            <span class= "font-weight-bold">Phone Number:</span> {{ @row['phone'] }} <br/>
+            <span class= "font-weight-bold">
+                State:</span><repeat group="{{ @states }}" key = "{{ @stateKey }}" value="{{ @stateValue }}"><check if="{{ @stateKey == @row['state'] }}"> {{
+                ucfirst(strtolower(@stateValue)) }} ({{ @row['state'] }})</check></repeat> <br/>
+            <check if="{{ @row['premium'] }} == 1">
+                <true>
+                    <span class= "font-weight-bold">Premium Member:</span> Yes <br/>
+                    <span class= "font-weight-bold">Interests:</span> {{ @row['interests'] }}
+                </true>
+                <false>
+                    <span class= "font-weight-bold">Premium Member:</span> No
+                </false>
+            </check>
+            <br/>
+            <span class= "font-weight-bold">Biography / Additional Information:</span> {{ @row['bio'] }}
+            <br/>
+        </p>
+    </div>
+</div>
+
+
+</body>
+</html>

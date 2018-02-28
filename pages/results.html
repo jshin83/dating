@@ -26,7 +26,7 @@ results for dating website
         <a class="navbar-brand" href="#">My Dating Website</a>
         <ul class="nav justify-content-end">
             <li class="nav-item">
-                <a class="nav-link active" href="{{ 'admin' }}">Admin</a>
+                <a class="nav-link active" href="{{ 'admin' }}" target="_blank">Admin</a>
             </li>
         </ul>
     </nav>
@@ -47,7 +47,7 @@ results for dating website
                                 <td class="p-3" >Name: {{ @fname }}</td>
                             </tr>
                             <tr class="border-bottom border-muted">
-                                <td class="p-3">Gender: {{ @gender }}</td>
+                                <td class="p-3">Gender: {{ ucfirst(@gender) }}</td>
                             </tr>
                             <tr class="border-bottom border-muted ">
                                 <td class="p-3">Age: {{ @age }}</td>
@@ -59,7 +59,9 @@ results for dating website
                                 <td class="p-3">Email: {{ @email }}</td>
                             </tr>
                             <tr class="border-bottom border-muted">
-                                <td class="p-3">State: {{ strtoupper(@state) }} </td>
+                                <td class="p-3">State: <repeat group="{{ @states }}" key = "{{ @stateKey }}" value="{{ @stateValue }}"><check if="{{ @stateKey == @state }}">{{
+                                    @stateValue }}</check></repeat>
+                                </td>
                             </tr>
                             <tr class="border-bottom border-muted">
                                 <td class="p-3">Seeking: {{ ucfirst(@seeking) }}</td>

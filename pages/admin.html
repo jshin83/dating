@@ -25,16 +25,42 @@ admin page for dating website
 </header>
 
 <body>
-<div class="container mt-3 mb-2">
-    <h2>Membership</h2>
-    <ol>
+    <div class = "container">
+    <h3 class="mt-2">Membership</h3>
+    <table class="table">
+        <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Age</th>
+            <th>Email</th>
+            <th>State</th>
+            <th>Gender</th>
+            <th>Seeking</th>
+            <th>Premium</th>
+            <th>Interests</th>
+            <th>View</th>
+        </tr>
+        </thead>
+        <tbody>
         <repeat group="{{ @allMembers }}" value="{{ @indiv }}">
-            <li><a href="{{ @BASE }}/summary/{{ @indiv['member_id'] }}"  target="_blank" >{{ @indiv['lname'] }}, {{ @indiv['fname'] }}</a></li>
 
+            <tr>
+                <td> {{ @indiv['member_id'] }}</td>
+                <td>{{ @indiv['lname'] }}, {{ @indiv['fname'] }}</td>
+                <td>{{ @indiv['age'] }}</td>
+                <td>{{ @indiv['email'] }}</td>
+                <td>{{ @indiv['state'] }}</td>
+                <td>{{ strtoupper(@indiv['gender'] )}}</td>
+                <td>{{ strtoupper(@indiv['seeking']) }}</td>
+                <td><input type = "checkbox" <check if="{{ @indiv['premium'] }} == 1">checked</check>></td>
+                <td>{{ @indiv['interests'] }}</td>
+                <td><a href="{{ @BASE }}/summary/{{ @indiv['member_id'] }}" target="_blank" ><img src="http://jshin.greenriverdev.com/328/dating/images/cupcake.jpg"
+                height="30%" alt="donut with pink glaze"></a></td>
+            </tr>
         </repeat>
-    </ol>
-    <hr/>
-
-</div>
+        </tbody>
+    </table>
+    </div>
 </body>
 </html>
